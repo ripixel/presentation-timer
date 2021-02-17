@@ -38,6 +38,8 @@ export const IndexPage: React.FC = () => {
   const isDisabled = !line1 || !line2 || hours === null || minutes === null;
 
   const onClick = () => {
+    delete window.canvas; // Remove the old canvas in prep for the new one
+
     const targetTime = new Date();
     targetTime.setHours(hours as number);
     targetTime.setMinutes(minutes as number);
