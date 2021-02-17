@@ -11,8 +11,10 @@ Allows you to create a countdown timer configured with:
 - Target Time
 - Two lines of text
 - A "playlist" of video URLs to play automatically
-- A custom image displayed on the timer somewhere (initially, on the mug)
+- A custom image displayed on the timer
 - A pop-out control window to change values without affecting the presentation window
+
+![screenshot](./readmeAssets/screenshot.png)
 
 All of this happens client-side - nothing is ever sent to any backend server - so no account required!
 
@@ -24,13 +26,17 @@ When you hit the button, you will see your presentation timer has begun, and ano
 
 That's it!
 
-![screenshot](./screenshot.png)
-
 ## Why?
 
 When doing presentations, it's nice to have a countdown to the start at the beginning, and it's even nicer to have some music playing in the background. However, combining these two things usually means a lot of messing around with audio inputs/outputs, or you just resort to playing the music out your speakers and detecting it with your microphone, or capturing your entire machine's audio.
 
 Having the presentation countdown **and** the music playing in the same tab means most streaming tools can pick up the audio in a nice way.
+
+## Themes
+
+### Macbook
+
+![screenshot](./readmeAssets/macbook.png)
 
 ## Running locally
 
