@@ -1,0 +1,28 @@
+.volume {
+  display: flex;
+
+  > * {
+    margin-right: 1rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.updateForm {
+  p {
+    font-size: 0.75rem;
+    padding: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  input {
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  button {
+    margin-top: 0;
+  }
+}

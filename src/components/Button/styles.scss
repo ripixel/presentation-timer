@@ -1,0 +1,27 @@
+.button {
+  box-sizing: border-box;
+  border: 2px solid #00ccbc;
+  padding: 1rem;
+  width: 100%;
+  background-color: transparent;
+  color: #00ccbc;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.primary {
+  background-color: #00ccbc;
+  color: #333;
+}
+
+.secondary {
+}
+
+.tertiary {
+}
+
+.disabled {
+  background-color: #ccc;
+  color: #fff;
+  border-color: #ccc;
+}
