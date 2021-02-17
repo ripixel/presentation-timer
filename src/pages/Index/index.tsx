@@ -8,7 +8,7 @@ import ConfigForm from '../../components/ConfigForm';
 import Heading from '../../components/Heading';
 import P from '../../components/P';
 
-import { getConfig, setConfig, THEMES } from '../../services/config';
+import { getConfig, setConfig, setVolume, THEMES } from '../../services/config';
 
 export const IndexPage: React.FC = () => {
   const history = useHistory();
@@ -37,6 +37,7 @@ export const IndexPage: React.FC = () => {
       playlist,
       theme: THEMES.MACBOOK,
     });
+    setVolume(5);
 
     history.push('/timer');
     window.open(
