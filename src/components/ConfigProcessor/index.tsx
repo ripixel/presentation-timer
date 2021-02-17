@@ -1,35 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react';
-import ReactPlayer from 'react-player';
+import React from 'react';
 
-import { getConfig, getVolume } from '../../services/config';
+import { getConfig } from '../../services/config';
 
 import Button from '../Button';
 import Centre from '../Centre';
 import P from '../P';
+import Player from '../Player';
 import Macbook from '../Themes/Macbook';
-
-import styles from './styles.scss';
 
 export const ConfigProcessor: React.FC = () => {
   const initialConfig = getConfig();
-  const player = useRef<ReactPlayer>(null);
-  const [volume, setVolume] = useState(getVolume() || 0.5);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const volume = getVolume();
-
-      if (volume === null) {
-        return;
-      }
-
-      setVolume(volume);
-    }, 1100);
-
-    return () => {
-      clearInterval(interval);
-    };
-  });
 
   if (!initialConfig) {
     return (
@@ -49,17 +29,7 @@ export const ConfigProcessor: React.FC = () => {
   return (
     <>
       {theme}
-      <div className={styles.player}>
-        <ReactPlayer
-          ref={player}
-          url={initialConfig.playlist}
-          playing
-          loop
-          volume={volume / 10}
-          width={250}
-          height={250}
-        />
-      </div>
+      <Player />
     </>
   );
 };
