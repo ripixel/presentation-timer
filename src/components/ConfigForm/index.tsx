@@ -123,7 +123,7 @@ export const ConfigForm: React.FC<Props> = ({
       {isUpdateForm && (
         <>
           <P>
-            Music Volue - Updates Immediately (
+            Music Volume - Updates Immediately (
             {volumeDisplay !== null && volumeDisplay > 0
               ? `${volumeDisplay}0%`
               : `Muted`}
