@@ -8,6 +8,8 @@ import Centre from '../Centre';
 import P from '../P';
 import Macbook from '../Themes/Macbook';
 
+import styles from './styles.scss';
+
 export const ConfigProcessor: React.FC = () => {
   const initialConfig = getConfig();
   const player = useRef<ReactPlayer>(null);
@@ -47,15 +49,17 @@ export const ConfigProcessor: React.FC = () => {
   return (
     <>
       {theme}
-      <ReactPlayer
-        ref={player}
-        url={initialConfig.playlist}
-        playing
-        loop
-        volume={volume / 10}
-        width={250}
-        height={250}
-      />
+      <div className={styles.player}>
+        <ReactPlayer
+          ref={player}
+          url={initialConfig.playlist}
+          playing
+          loop
+          volume={volume / 10}
+          width={250}
+          height={250}
+        />
+      </div>
     </>
   );
 };
