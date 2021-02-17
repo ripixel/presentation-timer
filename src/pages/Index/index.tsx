@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Button from '../../components/Button';
+import ByJamesKing from '../../components/ByJamesKing';
 import Centre from '../../components/Centre';
 import ConfigForm from '../../components/ConfigForm';
 import Heading from '../../components/Heading';
@@ -46,41 +47,44 @@ export const IndexPage: React.FC = () => {
   };
 
   return (
-    <Centre>
-      <Heading level={1} isTitle>
-        Let&apos;s set up your timer
-      </Heading>
-      <P>
-        When you launch your timer, it will open two tabs - one with the timer,
-        and one so you can modify the configuration as it&apos;s displayed (so
-        you don&apos;t have to mess with what&apos;s being presented on stream
-        to change it).
-      </P>
+    <>
+      <Centre>
+        <Heading level={1} isTitle>
+          Presentation Timer
+        </Heading>
+        <ByJamesKing />
+        <P>
+          When you launch your timer, it will open two tabs - one with the
+          timer, and one so you can modify the configuration as it&apos;s
+          displayed (so you don&apos;t have to mess with what&apos;s being
+          presented on stream to change it).
+        </P>
 
-      <P>Target Time</P>
-      <P>
-        For ease of use, this app assumes the current day is the target. Enter
-        your hours and minutes in 24-hour time below. For example, to set it to
-        2:45pm, you would enter 14 and 45.
-      </P>
+        <P bold>Target Time</P>
+        <P>
+          For ease of use, this app assumes the current day is the target. Enter
+          your hours and minutes in 24-hour time below. For example, to set it
+          to 2:45pm, you would enter 14 and 45.
+        </P>
 
-      <ConfigForm
-        line1={line1}
-        setLine1={setLine1}
-        line2={line2}
-        setLine2={setLine2}
-        hours={hours}
-        setHours={setHours}
-        minutes={minutes}
-        setMinutes={setMinutes}
-        playlist={playlist}
-        setPlaylist={setPlaylist}
-      />
+        <ConfigForm
+          line1={line1}
+          setLine1={setLine1}
+          line2={line2}
+          setLine2={setLine2}
+          hours={hours}
+          setHours={setHours}
+          minutes={minutes}
+          setMinutes={setMinutes}
+          playlist={playlist}
+          setPlaylist={setPlaylist}
+        />
 
-      <Button disabled={isDisabled} onClick={onClick}>
-        Show me my timer
-      </Button>
-    </Centre>
+        <Button disabled={isDisabled} onClick={onClick}>
+          Show me my timer
+        </Button>
+      </Centre>
+    </>
   );
 };
 
