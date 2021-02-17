@@ -13,5 +13,21 @@
   </head>
   <body>
     <main role="main" id="root"></main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-analytics.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: 'AIzaSyDHXqn8xXkREcTCG3aS-TGL6dJ0zihaATc',
+        authDomain: 'presentation-timer-f7d04.firebaseapp.com',
+        projectId: 'presentation-timer-f7d04',
+        storageBucket: 'presentation-timer-f7d04.appspot.com',
+        messagingSenderId: '357035931655',
+        appId: '1:357035931655:web:aebe1932f9fbc3487312a2',
+        measurementId: 'G-934XP2L44D',
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </body>
 </html>
