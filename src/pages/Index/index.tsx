@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import Button from '../../components/Button';
 import ByJamesKing from '../../components/ByJamesKing';
@@ -49,6 +50,9 @@ export const IndexPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Presentation Timer | Create</title>
+      </Helmet>
       <Centre>
         <Heading level={1} isTitle>
           Presentation Timer

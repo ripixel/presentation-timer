@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 import Button from '../../components/Button';
 import Centre from '../../components/Centre';
@@ -33,25 +34,30 @@ export const UpdatePage: React.FC = () => {
   };
 
   return (
-    <Centre>
-      <Heading level={3}>Presentation Timer Control</Heading>
+    <>
+      <Helmet>
+        <title>Presentation Timer | Controller</title>
+      </Helmet>
+      <Centre>
+        <Heading level={3}>Presentation Timer Control</Heading>
 
-      <ConfigForm
-        line1={line1}
-        setLine1={setLine1}
-        line2={line2}
-        setLine2={setLine2}
-        hours={hours}
-        setHours={setHours}
-        minutes={minutes}
-        setMinutes={setMinutes}
-        playlist={playlist}
-        setPlaylist={setPlaylist}
-        isUpdateForm
-      />
+        <ConfigForm
+          line1={line1}
+          setLine1={setLine1}
+          line2={line2}
+          setLine2={setLine2}
+          hours={hours}
+          setHours={setHours}
+          minutes={minutes}
+          setMinutes={setMinutes}
+          playlist={playlist}
+          setPlaylist={setPlaylist}
+          isUpdateForm
+        />
 
-      <Button onClick={onClick}>Update Timer</Button>
-    </Centre>
+        <Button onClick={onClick}>Update Timer</Button>
+      </Centre>
+    </>
   );
 };
 
