@@ -1,5 +1,7 @@
 # presentation-timer
 
+[![Known Vulnerabilities](https://snyk.io/test/github/ripixel/presentation-timer/badge.svg?targetFile=package.json)](https://snyk.io/test/github/ripixel/presentation-timer?targetFile=package.json) ![Deploy to Firebase Hosting on merge](https://github.com/ripixel/presentation-timer/workflows/Deploy%20to%20Firebase%20Hosting%20on%20merge/badge.svg?branch=main)
+
 A simple presentation countdown timer with music streaming for use on streams/presentations.
 
 ## Usage
