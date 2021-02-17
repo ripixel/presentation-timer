@@ -1,0 +1,27 @@
+.input {
+  // display: none;
+}
+
+.image {
+  max-width: 60%;
+  display: block;
+  margin: 20px auto;
+}
+
+.uploadingImage {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: rgba(255, 255, 255, 0.75);
+    z-index: 0;
+  }
+}
+
+.label {
+}

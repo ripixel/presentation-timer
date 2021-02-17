@@ -8,6 +8,7 @@ export interface Config {
   line1: string;
   line2: string;
   playlist?: string[];
+  image?: string;
 }
 
 const LOCAL_STORAGE_CONFIG_KEY = 'PRESENTATION_TIMER_CONFIG';

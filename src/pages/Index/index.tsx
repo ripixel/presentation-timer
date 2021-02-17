@@ -23,6 +23,7 @@ export const IndexPage: React.FC = () => {
     initialConfig?.targetTime.getMinutes()
   );
   const [playlist, setPlaylist] = useState(initialConfig?.playlist);
+  const [image, setImage] = useState(initialConfig?.image);
 
   const isDisabled = !line1 || !line2 || hours === null || minutes === null;
 
@@ -36,6 +37,7 @@ export const IndexPage: React.FC = () => {
       line1,
       line2,
       playlist,
+      image,
       theme: THEMES.MACBOOK,
     });
     setVolume(5);
@@ -65,7 +67,9 @@ export const IndexPage: React.FC = () => {
           presented on stream to change it).
         </P>
 
-        <P bold>Target Time</P>
+        <P bold title>
+          Target Time
+        </P>
         <P>
           For ease of use, this app assumes the current day is the target. Enter
           your hours and minutes in 24-hour time below. For example, to set it
@@ -83,6 +87,7 @@ export const IndexPage: React.FC = () => {
           setMinutes={setMinutes}
           playlist={playlist}
           setPlaylist={setPlaylist}
+          setImage={setImage}
         />
 
         <Button disabled={isDisabled} onClick={onClick}>

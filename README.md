@@ -4,6 +4,18 @@
 
 A simple presentation countdown timer with music streaming for use on streams/presentations.
 
+## Functionality
+
+Allows you to create a countdown timer configured with:
+
+- Target Time
+- Two lines of text
+- A "playlist" of video URLs to play automatically
+- A custom image displayed on the timer somewhere (initially, on the mug)
+- A pop-out control window to change values without affecting the presentation window
+
+All of this happens client-side - nothing is ever sent to any backend server - so no account required!
+
 ## Usage
 
 Go to [https://pt.ripixel.co.uk/](https://pt.ripixel.co.uk/), and configure your timer as instructed.

@@ -4,8 +4,10 @@ import { useHistory } from 'react-router-dom';
 import Timer from '../../Timer';
 
 import calcDiffMinsSecs from '../../../utils/calcDiffMinsSecs';
+import { contain } from '../../../utils/intrinsicScale';
 
 import background from '../../../../public/assets/mac-fronton.jpg';
+
 import { Config, getConfig } from '../../../services/config';
 
 export const Macbook: React.FC = () => {
@@ -18,6 +20,10 @@ export const Macbook: React.FC = () => {
   const macTextCentre = 1111;
   const macTextTop = 520;
   const maxTextWidth = 788;
+  const mugLeft = 364;
+  const mugTop = 674;
+  const mugWidth = 150;
+  const mugHeight = 160;
 
   const draw = (
     canvas: HTMLCanvasElement,
@@ -39,10 +45,29 @@ export const Macbook: React.FC = () => {
 
     const { minutes, seconds } = calcDiffMinsSecs(targetTime);
 
-    const image = new Image();
+    const logoImage = new Image();
 
-    image.onload = () => {
-      ctx.drawImage(image, 0, 0);
+    if (config?.image) {
+      logoImage.onload = () => {
+        const { offsetX, offsetY, width, height } = contain(
+          mugWidth,
+          mugHeight,
+          logoImage.width,
+          logoImage.height
+        );
+
+        console.log({ offsetX, offsetY, width, height });
+
+        ctx.drawImage(logoImage, mugLeft, mugTop, width, height);
+
+        setCanvasData(canvas.toDataURL());
+      };
+    }
+
+    const backgroundImage = new Image();
+
+    backgroundImage.onload = () => {
+      ctx.drawImage(backgroundImage, 0, 0);
 
       ctx.textAlign = 'center';
       ctx.fillStyle = '#fff';
@@ -62,10 +87,14 @@ export const Macbook: React.FC = () => {
       ctx.font = '80px Montserrat';
       ctx.fillText(line2, macTextCentre, macTextTop + 250, maxTextWidth);
 
-      setCanvasData(canvas.toDataURL());
+      if (config?.image) {
+        logoImage.src = config.image;
+      } else {
+        setCanvasData(canvas.toDataURL());
+      }
     };
 
-    image.src = background;
+    backgroundImage.src = background;
   };
 
   const updateDraw = (
