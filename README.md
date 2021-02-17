@@ -4,11 +4,13 @@ A simple presentation countdown timer with music streaming for use on streams/pr
 
 ## Usage
 
-Go to [the url](https://someurl.com), and configure your timer as instructed.
+Go to [https://pt.ripixel.co.uk/](https://pt.ripixel.co.uk/), and configure your timer as instructed.
 
 When you hit the button, you will see your presentation timer has begun, and another config window has popped open to allow you to amend it while running, without disturbing the presenting window.
 
 That's it!
+
+![screenshot](./screenshot.png)
 
 ## Why?
 
