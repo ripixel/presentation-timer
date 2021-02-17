@@ -111,7 +111,7 @@ export const ConfigForm: React.FC<Props> = ({
             with audio auto-playing
           </P>
           <TextInput
-            value={(playlist || []).join(', ')}
+            value={(playlist || []).join(',')}
             placeholder='Comma-separated list of URLs'
             onChange={(value) => {
               setPlaylist(value.split(',').map((url) => url.trim()));
