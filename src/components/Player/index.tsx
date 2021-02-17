@@ -25,10 +25,14 @@ export const Player: React.FC = () => {
     };
   });
 
+  if (!playlist || playlist.length === 0) {
+    return null;
+  }
+
   return (
     <div className={styles.player}>
       <ReactPlayer
-        url={playlist}
+        url={playlist.filter((item) => item !== '')}
         playing
         loop
         volume={volume / 10}
