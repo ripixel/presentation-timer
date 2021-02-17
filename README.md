@@ -36,7 +36,11 @@ Having the presentation countdown **and** the music playing in the same tab mean
 
 ### Macbook
 
-![screenshot](./readmeAssets/macbook.png)
+![macbook screenshot](./readmeAssets/macbook.png)
+
+### Cinema
+
+![cinema screenshot](./readmeAssets/cinema.png)
 
 ## Running locally
 
