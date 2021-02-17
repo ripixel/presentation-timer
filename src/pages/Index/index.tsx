@@ -9,7 +9,14 @@ import ConfigForm from '../../components/ConfigForm';
 import Heading from '../../components/Heading';
 import P from '../../components/P';
 
-import { getConfig, setConfig, setVolume, THEMES } from '../../services/config';
+import {
+  getConfig,
+  getVolume,
+  setConfig,
+  setVolume,
+  THEMES,
+} from '../../services/config';
+import Select from '../../components/Input/Select';
 
 export const IndexPage: React.FC = () => {
   const history = useHistory();
@@ -24,6 +31,9 @@ export const IndexPage: React.FC = () => {
   );
   const [playlist, setPlaylist] = useState(initialConfig?.playlist);
   const [image, setImage] = useState(initialConfig?.image);
+  const [theme, setTheme] = useState<string>(
+    initialConfig?.theme || THEMES.MACBOOK
+  );
 
   const isDisabled = !line1 || !line2 || hours === null || minutes === null;
 
@@ -38,9 +48,11 @@ export const IndexPage: React.FC = () => {
       line2,
       playlist,
       image,
-      theme: THEMES.MACBOOK,
+      theme: theme as THEMES,
     });
-    setVolume(5);
+    if (getVolume() === null) {
+      setVolume(5);
+    }
 
     history.push('/timer');
     window.open(
@@ -88,6 +100,19 @@ export const IndexPage: React.FC = () => {
           playlist={playlist}
           setPlaylist={setPlaylist}
           setImage={setImage}
+        />
+
+        <P bold title>
+          Theme
+        </P>
+        <P>Choose the theme for your timer</P>
+        <P bold>You cannot update the theme once the presentation is running</P>
+        <Select
+          name='ThemeSelector'
+          onChange={setTheme}
+          options={Object.values(THEMES)}
+          placeholder='Select theme'
+          value={theme}
         />
 
         <Button disabled={isDisabled} onClick={onClick}>

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 
-import { getConfig } from '../../services/config';
+import { getConfig, THEMES } from '../../services/config';
 
 import Button from '../Button';
 import Centre from '../Centre';
 import P from '../P';
 import Player from '../Player';
+
 import Macbook from '../Themes/Macbook';
+import Cinema from '../Themes/Cinema';
 
 export const ConfigProcessor: React.FC = () => {
   useEffect(() => {
@@ -19,7 +21,9 @@ export const ConfigProcessor: React.FC = () => {
     };
   }, []);
 
-  if (!window.config) {
+  const config = getConfig();
+
+  if (!config) {
     return (
       <Centre>
         <P>
@@ -31,8 +35,18 @@ export const ConfigProcessor: React.FC = () => {
     );
   }
 
-  // to prepare for multiple themes
-  const theme = <Macbook />;
+  let theme = <Macbook />;
+
+  switch (config.theme) {
+    case THEMES.MACBOOK:
+      theme = <Macbook />;
+      break;
+    case THEMES.CINEMA:
+      theme = <Cinema />;
+      break;
+    default:
+    // do nothing, it's already set
+  }
 
   return (
     <>

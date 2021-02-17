@@ -4,22 +4,20 @@ import Timer from '../../Timer';
 
 import { contain } from '../../../utils/intrinsicScale';
 
-import background from '../../../../public/assets/mac-fronton.jpg';
+import background from '../../../../public/assets/cinema.png';
+
 import { getDrawingInfo } from '../../../utils/getDrawingInfo';
 
-const IMG_WIDTH = 2000,
-  IMG_HEIGHT = 1333,
-  MAC_LEFT_OF_SCREEN = 717,
-  MAC_TOP_OF_SCREEN = 331,
-  MAC_TEXT_CENTRE = 1111,
-  MAC_TEXT_TOP = 520,
-  MAC_TEXT_WIDTH = 788,
-  MUG_LEFT = 364,
-  MUG_TOP = 674,
-  MUG_WIDTH = 150,
-  MUG_HEIGHT = 160;
+const IMG_WIDTH = 1920,
+  IMG_HEIGHT = 864,
+  LEFT_OF_SCREEN = 531,
+  TOP_OF_SCREEN = 78,
+  TEXT_WIDTH = 580,
+  CUSTOM_IMAGE_LEFT = 1143,
+  CUSTOM_IMAGE_WIDTH = 220,
+  SCREEN_HEIGHT = 350;
 
-export const Macbook: React.FC = () => {
+export const Cinema: React.FC = () => {
   const drawText = (
     ctx: CanvasRenderingContext2D,
     line1: string,
@@ -27,23 +25,24 @@ export const Macbook: React.FC = () => {
     minutes: number,
     seconds: number
   ): void => {
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#fff';
-    ctx.font = '200px monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#333';
+    ctx.font = '180px monospace';
     ctx.fillText(
       `${minutes < 10 ? `0${minutes}` : minutes}:${
         seconds < 10 ? `0${seconds}` : seconds
       }`,
-      MAC_TEXT_CENTRE,
-      MAC_TEXT_TOP,
-      MAC_TEXT_WIDTH
+      LEFT_OF_SCREEN,
+      TOP_OF_SCREEN + 20,
+      TEXT_WIDTH
     );
 
-    ctx.font = '80px Montserrat';
-    ctx.fillText(line1, MAC_TEXT_CENTRE, MAC_TEXT_TOP + 150, MAC_TEXT_WIDTH);
+    ctx.font = '60px Montserrat';
+    ctx.fillText(line1, LEFT_OF_SCREEN + 10, TOP_OF_SCREEN + 190, TEXT_WIDTH);
 
-    ctx.font = '80px Montserrat';
-    ctx.fillText(line2, MAC_TEXT_CENTRE, MAC_TEXT_TOP + 250, MAC_TEXT_WIDTH);
+    ctx.font = '60px Montserrat';
+    ctx.fillText(line2, LEFT_OF_SCREEN + 10, TOP_OF_SCREEN + 270, TEXT_WIDTH);
   };
 
   const draw = (setCanvasData: () => void) => {
@@ -54,16 +53,16 @@ export const Macbook: React.FC = () => {
     if (image) {
       logoImage.onload = () => {
         const { offsetX, offsetY, width, height } = contain(
-          MUG_WIDTH,
-          MUG_HEIGHT,
+          CUSTOM_IMAGE_WIDTH,
+          SCREEN_HEIGHT,
           logoImage.width,
           logoImage.height
         );
 
         ctx.drawImage(
           logoImage,
-          MUG_LEFT + offsetX,
-          MUG_TOP + offsetY,
+          CUSTOM_IMAGE_LEFT + offsetX,
+          TOP_OF_SCREEN + offsetY,
           width,
           height
         );
@@ -93,8 +92,8 @@ export const Macbook: React.FC = () => {
     const { line1, line2, minutes, seconds, ctx } = getDrawingInfo();
 
     ctx.beginPath();
-    ctx.fillStyle = '#000';
-    ctx.fillRect(MAC_LEFT_OF_SCREEN, MAC_TOP_OF_SCREEN, 788, 520);
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(LEFT_OF_SCREEN, TOP_OF_SCREEN, TEXT_WIDTH + 20, 354);
 
     drawText(ctx, line1, line2, minutes, seconds);
 
@@ -111,4 +110,4 @@ export const Macbook: React.FC = () => {
   );
 };
 
-export default Macbook;
+export default Cinema;

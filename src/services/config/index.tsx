@@ -1,5 +1,6 @@
 export enum THEMES {
   MACBOOK = 'MACBOOK',
+  CINEMA = 'CINEMA',
 }
 
 export interface Config {

@@ -126,11 +126,12 @@ export const ConfigForm: React.FC<Props> = ({
           {setImage && (
             <>
               <P bold title>
-                Mug Image
+                Custom Image
               </P>
-              <P>Choose an image to display on the mug</P>
+              <P>Choose a custom image to display</P>
               <P bold>
-                You cannot update the mug image once the presentation is running
+                You cannot update the custom image once the presentation is
+                running
               </P>
               <FileInput
                 onSuccessfulUpload={setImage}

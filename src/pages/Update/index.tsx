@@ -6,10 +6,14 @@ import Centre from '../../components/Centre';
 import ConfigForm from '../../components/ConfigForm';
 import Heading from '../../components/Heading';
 
-import { getConfig, setConfig, THEMES } from '../../services/config';
+import { getConfig, setConfig } from '../../services/config';
 
 export const UpdatePage: React.FC = () => {
   const initialConfig = getConfig();
+
+  if (!initialConfig) {
+    throw new Error('No config defined');
+  }
 
   const [line1, setLine1] = useState(initialConfig?.line1 || '');
   const [line2, setLine2] = useState(initialConfig?.line2 || '');
@@ -25,11 +29,11 @@ export const UpdatePage: React.FC = () => {
     targetTime.setMinutes(minutes as number);
 
     setConfig({
+      ...initialConfig,
       targetTime,
       line1,
       line2,
       playlist,
-      theme: THEMES.MACBOOK,
     });
   };
 
