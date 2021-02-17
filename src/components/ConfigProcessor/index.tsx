@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { getConfig } from '../../services/config';
 
@@ -9,9 +9,17 @@ import Player from '../Player';
 import Macbook from '../Themes/Macbook';
 
 export const ConfigProcessor: React.FC = () => {
-  const initialConfig = getConfig();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getConfig();
+    }, 2100);
 
-  if (!initialConfig) {
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  if (!window.config) {
     return (
       <Centre>
         <P>

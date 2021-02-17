@@ -3,14 +3,8 @@ import React, { useState, useEffect } from 'react';
 import styles from './styles.scss';
 
 interface Props {
-  draw: (
-    canvas: HTMLCanvasElement,
-    setCanvasData: (data: string) => void
-  ) => void;
-  updateDraw: (
-    canvas: HTMLCanvasElement,
-    setCanvasData: (data: string) => void
-  ) => void;
+  draw: (setCanvasData: () => void) => void;
+  updateDraw: (setCanvasData: () => void) => void;
   width: number;
   height: number;
 }
@@ -21,17 +15,35 @@ declare global {
   }
 }
 
-export const Timer: React.FC<Props> = ({ draw, updateDraw, width, height }) => {
-  const canvas = window.canvas ?? document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
+const createCanvas = (width: number, height: number): HTMLCanvasElement => {
+  if (!window.canvas) {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    window.canvas = canvas;
+  }
 
+  return window.canvas;
+};
+
+export const Timer: React.FC<Props> = ({ draw, updateDraw, width, height }) => {
   const [canvasData, setCanvasData] = useState<string>('');
 
-  useEffect(() => {
-    draw(canvas, setCanvasData);
+  const setCanvasDataFromWindow = () => {
+    if (!window.canvas) {
+      throw new Error('No canvas on window');
+    }
+    setCanvasData(window.canvas.toDataURL());
+  };
 
-    const interval = setInterval(() => updateDraw(canvas, setCanvasData), 1000);
+  useEffect(() => {
+    createCanvas(width, height);
+
+    draw(setCanvasDataFromWindow);
+
+    const interval = setInterval(() => {
+      updateDraw(setCanvasDataFromWindow);
+    }, 1000);
 
     return () => {
       clearInterval(interval);

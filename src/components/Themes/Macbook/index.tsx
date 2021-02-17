@@ -1,66 +1,48 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Timer from '../../Timer';
 
-import calcDiffMinsSecs from '../../../utils/calcDiffMinsSecs';
 import { contain } from '../../../utils/intrinsicScale';
 
 import background from '../../../../public/assets/mac-fronton.jpg';
+import { getDrawingInfo } from '../../../utils/getDrawingInfo';
 
-import { Config, getConfig } from '../../../services/config';
+const IMG_WIDTH = 2000,
+  IMG_HEIGHT = 1333,
+  MAC_LEFT_OF_SCREEN = 717,
+  MAC_TOP_OF_SCREEN = 331,
+  MAC_TEXT_CENTRE = 1111,
+  MAC_TEXT_TOP = 520,
+  MAC_TEXT_WIDTH = 788,
+  MUG_LEFT = 364,
+  MUG_TOP = 674,
+  MUG_WIDTH = 150,
+  MUG_HEIGHT = 160;
 
 export const Macbook: React.FC = () => {
-  const history = useHistory();
-
-  const imgWidth = 2000;
-  const imgHeight = 1333;
-  const macLeftOfScreen = 717;
-  const macTopOfScreen = 331;
-  const macTextCentre = 1111;
-  const macTextTop = 520;
-  const maxTextWidth = 788;
-  const mugLeft = 364;
-  const mugTop = 674;
-  const mugWidth = 150;
-  const mugHeight = 160;
-
-  const draw = (
-    canvas: HTMLCanvasElement,
-    setCanvasData: (data: string) => void
-  ) => {
-    const config = getConfig();
-
-    if (!config) {
-      history.push('/');
-    }
-
-    const { targetTime, line1, line2 } = config as Config;
-
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) {
-      return;
-    }
-
-    const { minutes, seconds } = calcDiffMinsSecs(targetTime);
+  const draw = (setCanvasData: () => void) => {
+    const { line1, line2, image, minutes, seconds, ctx } = getDrawingInfo();
 
     const logoImage = new Image();
 
-    if (config?.image) {
+    if (image) {
       logoImage.onload = () => {
         const { offsetX, offsetY, width, height } = contain(
-          mugWidth,
-          mugHeight,
+          MUG_WIDTH,
+          MUG_HEIGHT,
           logoImage.width,
           logoImage.height
         );
 
-        console.log({ offsetX, offsetY, width, height });
+        ctx.drawImage(
+          logoImage,
+          MUG_LEFT + offsetX,
+          MUG_TOP + offsetY,
+          width,
+          height
+        );
 
-        ctx.drawImage(logoImage, mugLeft, mugTop, width, height);
-
-        setCanvasData(canvas.toDataURL());
+        setCanvasData();
       };
     }
 
@@ -76,50 +58,33 @@ export const Macbook: React.FC = () => {
         `${minutes < 10 ? `0${minutes}` : minutes}:${
           seconds < 10 ? `0${seconds}` : seconds
         }`,
-        macTextCentre,
-        macTextTop,
-        maxTextWidth
+        MAC_TEXT_CENTRE,
+        MAC_TEXT_TOP,
+        MAC_TEXT_WIDTH
       );
 
       ctx.font = '80px Montserrat';
-      ctx.fillText(line1, macTextCentre, macTextTop + 150, maxTextWidth);
+      ctx.fillText(line1, MAC_TEXT_CENTRE, MAC_TEXT_TOP + 150, MAC_TEXT_WIDTH);
 
       ctx.font = '80px Montserrat';
-      ctx.fillText(line2, macTextCentre, macTextTop + 250, maxTextWidth);
+      ctx.fillText(line2, MAC_TEXT_CENTRE, MAC_TEXT_TOP + 250, MAC_TEXT_WIDTH);
 
-      if (config?.image) {
-        logoImage.src = config.image;
+      if (image) {
+        logoImage.src = image;
       } else {
-        setCanvasData(canvas.toDataURL());
+        setCanvasData();
       }
     };
 
     backgroundImage.src = background;
   };
 
-  const updateDraw = (
-    canvas: HTMLCanvasElement,
-    setCanvasData: (data: string) => void
-  ) => {
-    const config = getConfig();
-
-    if (!config) {
-      history.push('/');
-    }
-
-    const { targetTime, line1, line2 } = config as Config;
-
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) {
-      return;
-    }
+  const updateDraw = (setCanvasData: () => void) => {
+    const { line1, line2, minutes, seconds, ctx } = getDrawingInfo();
 
     ctx.beginPath();
     ctx.fillStyle = '#000';
-    ctx.fillRect(macLeftOfScreen, macTopOfScreen, 788, 520);
-
-    const { minutes, seconds } = calcDiffMinsSecs(targetTime);
+    ctx.fillRect(MAC_LEFT_OF_SCREEN, MAC_TOP_OF_SCREEN, 788, 520);
 
     ctx.textAlign = 'center';
     ctx.fillStyle = '#fff';
@@ -128,26 +93,26 @@ export const Macbook: React.FC = () => {
       `${minutes < 10 ? `0${minutes}` : minutes}:${
         seconds < 10 ? `0${seconds}` : seconds
       }`,
-      macTextCentre,
-      macTextTop,
-      maxTextWidth
+      MAC_TEXT_CENTRE,
+      MAC_TEXT_TOP,
+      MAC_TEXT_WIDTH
     );
 
     ctx.font = '80px Montserrat';
-    ctx.fillText(line1, macTextCentre, macTextTop + 150, maxTextWidth);
+    ctx.fillText(line1, MAC_TEXT_CENTRE, MAC_TEXT_TOP + 150, MAC_TEXT_WIDTH);
 
     ctx.font = '80px Montserrat';
-    ctx.fillText(line2, macTextCentre, macTextTop + 250, maxTextWidth);
+    ctx.fillText(line2, MAC_TEXT_CENTRE, MAC_TEXT_TOP + 250, MAC_TEXT_WIDTH);
 
-    setCanvasData(canvas.toDataURL());
+    setCanvasData();
   };
 
   return (
     <Timer
       draw={draw}
       updateDraw={updateDraw}
-      width={imgWidth}
-      height={imgHeight}
+      width={IMG_WIDTH}
+      height={IMG_HEIGHT}
     />
   );
 };

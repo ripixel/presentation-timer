@@ -14,6 +14,13 @@ export interface Config {
 const LOCAL_STORAGE_CONFIG_KEY = 'PRESENTATION_TIMER_CONFIG';
 const LOCAL_STORAGE_VOLUME_KEY = 'PRESENTATION_TIMER_VOLUME';
 
+declare global {
+  interface Window {
+    config?: Config;
+    volume?: number;
+  }
+}
+
 export const setConfig = (config: Config): void => {
   window.localStorage.setItem(LOCAL_STORAGE_CONFIG_KEY, JSON.stringify(config));
 };
@@ -26,10 +33,12 @@ export const getConfig = (): Config | null => {
   }
 
   const parsedConfig = JSON.parse(config) as Config;
-  return {
+  const newConfig = {
     ...parsedConfig,
     targetTime: new Date(parsedConfig.targetTime),
   };
+  window.config = newConfig;
+  return newConfig;
 };
 
 export const setVolume = (volume: number): void => {
@@ -43,5 +52,7 @@ export const getVolume = (): number | null => {
     return null;
   }
 
-  return parseInt(volume, 10);
+  const newVolume = parseInt(volume, 10);
+  window.volume = newVolume;
+  return newVolume;
 };
