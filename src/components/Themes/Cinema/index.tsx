@@ -10,12 +10,17 @@ import { getDrawingInfo } from '../../../utils/getDrawingInfo';
 
 const IMG_WIDTH = 1920,
   IMG_HEIGHT = 864,
-  LEFT_OF_SCREEN = 531,
   TOP_OF_SCREEN = 78,
+  TIMER_RIGHT = 1300,
   TEXT_WIDTH = 580,
-  CUSTOM_IMAGE_LEFT = 1143,
-  CUSTOM_IMAGE_WIDTH = 220,
-  SCREEN_HEIGHT = 350;
+  CUSTOM_IMAGE_TOP = 153,
+  CUSTOM_IMAGE_LEFT = 650,
+  CUSTOM_IMAGE_WIDTH = 200,
+  CUSTOM_IMAGE_HEIGHT = 200,
+  LINES_LEFT = 870,
+  LINES_WIDTH = 430,
+  LINE_ONE_TOP = 190,
+  LINE_TWO_TOP = 270;
 
 export const Cinema: React.FC = () => {
   const drawText = (
@@ -25,24 +30,25 @@ export const Cinema: React.FC = () => {
     minutes: number,
     seconds: number
   ): void => {
-    ctx.textAlign = 'left';
+    ctx.textAlign = 'right';
     ctx.textBaseline = 'top';
-    ctx.fillStyle = '#333';
-    ctx.font = '180px monospace';
+    ctx.fillStyle = '#fff';
+    ctx.font = '40px monospace';
     ctx.fillText(
       `${minutes < 10 ? `0${minutes}` : minutes}:${
         seconds < 10 ? `0${seconds}` : seconds
       }`,
-      LEFT_OF_SCREEN,
+      TIMER_RIGHT,
       TOP_OF_SCREEN + 20,
       TEXT_WIDTH
     );
 
-    ctx.font = '60px Montserrat';
-    ctx.fillText(line1, LEFT_OF_SCREEN + 10, TOP_OF_SCREEN + 190, TEXT_WIDTH);
+    ctx.textAlign = 'left';
+    ctx.font = '40px Montserrat';
+    ctx.fillText(line1.toUpperCase(), LINES_LEFT, LINE_ONE_TOP, LINES_WIDTH);
 
-    ctx.font = '60px Montserrat';
-    ctx.fillText(line2, LEFT_OF_SCREEN + 10, TOP_OF_SCREEN + 270, TEXT_WIDTH);
+    ctx.font = '18px Montserrat';
+    ctx.fillText(line2, LINES_LEFT, LINE_TWO_TOP, LINES_WIDTH);
   };
 
   const draw = (setCanvasData: () => void) => {
@@ -54,7 +60,7 @@ export const Cinema: React.FC = () => {
       logoImage.onload = () => {
         const { offsetX, offsetY, width, height } = contain(
           CUSTOM_IMAGE_WIDTH,
-          SCREEN_HEIGHT,
+          CUSTOM_IMAGE_HEIGHT,
           logoImage.width,
           logoImage.height
         );
@@ -62,7 +68,7 @@ export const Cinema: React.FC = () => {
         ctx.drawImage(
           logoImage,
           CUSTOM_IMAGE_LEFT + offsetX,
-          TOP_OF_SCREEN + offsetY,
+          CUSTOM_IMAGE_TOP + offsetY,
           width,
           height
         );
@@ -92,8 +98,9 @@ export const Cinema: React.FC = () => {
     const { line1, line2, minutes, seconds, ctx } = getDrawingInfo();
 
     ctx.beginPath();
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(LEFT_OF_SCREEN, TOP_OF_SCREEN, TEXT_WIDTH + 20, 354);
+    ctx.fillStyle = '#111';
+    ctx.fillRect(LINES_LEFT, TOP_OF_SCREEN, LINES_WIDTH, 160);
+    ctx.fillRect(LINES_LEFT, TOP_OF_SCREEN + 180, LINES_WIDTH, 100);
 
     drawText(ctx, line1, line2, minutes, seconds);
 
