@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
+    "@testing-library/react": "^11.2.5",
     "@types/jest": "^24.0.15",
     "@types/node": "^13.13.36",
     "@types/prettier": "^1.16.4",
